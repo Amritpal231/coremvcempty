@@ -1,0 +1,34 @@
+﻿@model EmployeeVM
+
+@{
+    ViewBag.PageTitle = "Create Employee";
+}
+<form enctype="multipart/form-data" asp-action="Create" asp-controller="Home" method="post">
+    <div class="form-group">
+        <label asp-for="Name"></label>
+        <input asp-for="Name" class="form-control" />
+        <span asp-validation-for="Name" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Email"></label>
+        <input class="form-control" asp-for="Email" />
+        <span asp-validation-for="Email" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Department"></label>
+        <select asp-for="Department" asp-items="Html.GetEnumSelectList<Dept>()" class="form-control">
+            <option value="">Please select</option>
+        </select>
+        <span asp-validation-for="Department" class="text-danger"></span>
+    </div>
+    <div class="form-group row">
+        <label asp-for="Photo"></label>    
+            <input class="form-control custom-file-input" asp-for="Photo" multiple />      
+        
+    </div>
+    <div class="form-group">
+        <br />
+        <button type="submit" class="btn btn-primary">Create</button>
+    </div>
+
+</form>

@@ -1,0 +1,29 @@
+﻿@model IEnumerable<coremvcempty.Models.Employee>
+@{
+    ViewBag.PageTitle = "Employee List ";
+}
+
+
+<table>
+    <tr>
+        @foreach (var emp in Model)
+        {
+            var photopath = "~/Images/" + (emp.PhotoPath ?? "employee.png");
+        <td>
+            <div class="card">
+                <img src="@photopath" class="card-img-top imageThumbnail" asp-append-version="true"/>
+                <div class="card-body">
+                    <h5 class="card-title">@emp.Name</h5>
+                    <a asp-controller="home" asp-action="details" asp-route-id="@emp.Id" class="btn btn-primary">View</a>
+                    <a asp-controller="home" asp-action="edit" asp-route-id="@emp.Id" class="btn btn-primary">Edit</a>
+                    <a asp-controller="home" asp-action="details" asp-route-id="@emp.Id" class="btn btn-danger">Delete</a>
+                </div>
+            </div>
+        </td>
+                }
+        </tr>
+    </table>
+
+
+
+

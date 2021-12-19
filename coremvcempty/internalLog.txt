@@ -1,0 +1,16 @@
+2021-12-12 16:17:12.0401 Info Message Template Auto Format enabled
+2021-12-12 16:17:12.3741 Info Adding target FileTarget(Name=alldata)
+2021-12-12 16:17:12.6952 Error Parsing configuration from C:\Users\DReam\source\repos\coremvcempty\coremvcempty\bin\Debug\netcoreapp3.1\NLog.config failed. Exception: NLog.NLogConfigurationException: Exception when parsing C:\Users\DReam\source\repos\coremvcempty\coremvcempty\bin\Debug\netcoreapp3.1\NLog.config. 
+ ---> NLog.NLogConfigurationException: Target 'allfile' not found for logging rule: *.
+   at NLog.Config.LoggingConfigurationParser.ParseLoggingRuleTargets(String writeTargets, LoggingRule rule)
+   at NLog.Config.LoggingConfigurationParser.ParseRuleElement(ILoggingConfigurationElement loggerElement)
+   at NLog.Config.LoggingConfigurationParser.ParseRulesElement(ILoggingConfigurationElement rulesElement, IList`1 rulesCollection)
+   at NLog.Config.LoggingConfigurationParser.LoadConfig(ILoggingConfigurationElement nlogConfig, String basePath)
+   at NLog.Config.XmlLoggingConfiguration.ParseNLogElement(ILoggingConfigurationElement nlogElement, String filePath, Boolean autoReloadDefault)
+   at NLog.Config.XmlLoggingConfiguration.ParseTopLevel(NLogXmlElement content, String filePath, Boolean autoReloadDefault)
+   at NLog.Config.XmlLoggingConfiguration.Initialize(XmlReader reader, String fileName, Boolean ignoreErrors)
+   --- End of inner exception stack trace ---
+2021-12-12 16:17:12.7139 Warn Failed loading config from C:\Users\DReam\source\repos\coremvcempty\coremvcempty\bin\Debug\netcoreapp3.1\NLog.config. Invalid XML?
+2021-12-12 16:17:12.8279 Info Found 15 configuration items
+2021-12-12 16:17:14.0093 Info Configuration initialized.
+2021-12-12 16:17:14.0381 Info NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 4.6.3.9764. Product version: 4.6.3.
