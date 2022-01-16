@@ -1,5 +1,6 @@
 ﻿using coremvcempty.Models;
 using coremvcempty.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -10,6 +11,8 @@ using System.Threading.Tasks;
 
 namespace coremvcempty.Controllers
 {
+    //[Authorize(Roles ="Admin")]
+    [Authorize]
     public class AdministrationController : Controller
     {
         private readonly RoleManager<IdentityRole> roleManager;
@@ -55,6 +58,18 @@ namespace coremvcempty.Controllers
 
         }
 
+
+
+        [HttpGet]
+        public IActionResult GetUsersList()
+        {
+            var users=userManager.Users;
+
+            return View(users);
+
+        }
+
+
         [HttpGet]
         public async Task<IActionResult> EditRole(string id)
         {
@@ -89,6 +104,9 @@ namespace coremvcempty.Controllers
             return View(model);
 
         }
+
+
+
         [HttpPost]
         public async Task<IActionResult> EditRole(EditRoleVM model)
         {
@@ -156,9 +174,44 @@ namespace coremvcempty.Controllers
         }
 
         [HttpPost]
-        public  IActionResult AddOrRemoveUsersInRole(AddOrRemoveUsersinRoleVM model)
+        public async Task<IActionResult> AddOrRemoveUsersInRole(List<AddOrRemoveUsersinRoleVM> model, string roleId)
         {
-             return View();
+            var role = await roleManager.FindByIdAsync(roleId);
+
+            if (role == null)
+            {
+                ViewBag.ErrorMessage = $"Role {roleId} Not Found";
+                return View("NotFoundPage");
+            }
+            else
+            {
+                foreach (var users in model)
+                {
+                    var user = await userManager.FindByIdAsync(users.UserId);
+
+                    IdentityResult result=null;
+
+                    if (users.IsSelected && !(await userManager.IsInRoleAsync(user, role.Name)))
+                    {
+                         result = await userManager.AddToRoleAsync(user, role.Name);
+                    }
+                    else if (!users.IsSelected && (await userManager.IsInRoleAsync(user, role.Name)))
+                    {
+                         result = await userManager.RemoveFromRoleAsync(user, role.Name);
+                    }
+                    else { continue; }
+                    
+                    if(result!= null && !result.Succeeded)
+                    {
+                        ModelState.AddModelError("","");
+                        return View(model);                    
+                    }
+                   
+                }
+                return RedirectToAction("EditRole",new { Id = roleId });
+            }
+
+           
         }
     }
 }

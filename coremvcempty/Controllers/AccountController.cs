@@ -41,6 +41,10 @@ namespace coremvcempty.Controllers
 
                 if (newUser.Succeeded)
                 {
+                    if(signInManager.IsSignedIn(User) && User.IsInRole("Admin"))
+                    {
+                       return  RedirectToAction("GetUsersList", "Administration");
+                    }
                     await signInManager.SignInAsync(user, isPersistent:false);
                     return RedirectToAction("Index", "Home");
                 }

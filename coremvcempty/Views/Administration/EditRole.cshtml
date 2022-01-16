@@ -18,7 +18,7 @@
         <button type="submit" class="btn btn-primary">Update</button>
    
         <br />
-        <a  asp-action="GetRole" class="btn btn-danger">Cancel</a>
+        <a asp-action="GetRolesList" class="btn btn-danger">Cancel</a>
     </div>
     <div class="card">
         <div class="card-header">
@@ -27,24 +27,26 @@
 
         @if (Model.UsersList.Any())
         {
-            foreach (var user in Model.UsersList)
-            {
-                <div class="card-body">
-                    <h5 class="card-body">@user</h5>
-                </div>
+    <div class="card-body">
+        @foreach (var user in Model.UsersList)
+        {
 
-            }
+        <h5 class="card-body">@user</h5>
+
+
+        }
+    </div>
         }
         else
         {
-            <div class="card-body">
-                <h5 class="card-body">No user</h5>
-            </div>
+        <div class="card-body">
+            <h5 class="card-body">No user</h5>
+        </div>
 
         }
         <div class="card-footer">
             <a asp-controller="Administration" asp-route-roleId="@Model.Id" asp-action="AddOrRemoveUsersInRole" class="btn btn-primary">Add or Remove Users</a>
-           
+
         </div>
 
     </div>

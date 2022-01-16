@@ -10,6 +10,7 @@
     <script src="~/lib/jquery/jquery.js"></script>
     <script src="~/lib/jquery-validate/jquery.validate.js"></script>
     <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>
+    <script src="~/lib/twitter-bootstrap/js/bootstrap.js"></script>
     @*<environment exclude="=Development">
             <link href="https from the url" rel="stylesheet" />
         //just for practice
@@ -26,6 +27,19 @@
                 <li class="nav-item">
                     <a asp-controller="home" asp-action="create" class="nav-link">Create</a>
                 </li>
+                @if (signInManager.IsSignedIn(User) && User.IsInRole("Admin"))
+                {
+                   
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" id="navbardropmenulink" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Manage</a>
+                            <div class="dropdown-menu" aria-labelledby="navbardropmenulink">
+                                <a asp-controller="Administration" asp-action="GetRolesList" class="dropdown-item" >Manage Roles</a>
+                                <a asp-controller="Administration" asp-action="GetUsersList" class="dropdown-item" >Manage Users</a>
+                            </div>
+                        </li>
+                    
+                }
+
             </ul>
             <ul class="navbar-nav ml-auto">
                 @if (signInManager.IsSignedIn(User))

@@ -52,10 +52,10 @@ namespace coremvcempty
             else
             {
             //app.UseStatusCodePages();
-
          
              app.UseStatusCodePagesWithReExecute("/Error/{0}");
-               app.UseExceptionHandler("/Error");
+
+             app.UseExceptionHandler("/Error");
 
             }
 
